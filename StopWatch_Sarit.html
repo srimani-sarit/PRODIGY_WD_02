@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stopwatch</title>
+<style>
+    body {
+       
+        text-align: center;   
+        background-image: url("bg.jpg");
+    }
+    
+    .stopwatch {
+        
+        margin: 50px 0;
+        font-weight: bolder;
+        color: aliceblue;
+        font-size: 120px;
+        margin-top: 10px;
+        margin-left: -10px;
+    }
+    .controls {
+        margin: 20px 0;
+    }
+    .box{
+        font-size: xx-small;
+    }
+
+    .play{
+        width: 90px;
+        padding: 70px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    .heading{
+        color: rgb(212, 214, 80);
+        font-size: 60px;
+        margin-top: 99px; 
+        margin-bottom: -px;75
+        margin-left: -45px;
+        padding: 0;
+        font-style: italic;
+    }
+    .reset{
+        width: 90px;
+        padding: 70px;
+        margin-left: -405px;
+        margin-bottom: 10px;
+    }
+    .pause{
+        width: 90px;
+        padding: 70px;
+        margin-left: -393px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+    <h1 class="heading">Stopwatch: Time Your Moments</h1>
+<div class="stopwatch">00:00:00</div>
+<div class="controls">
+    <img src="Screenshot_2024-06-29-16-53-46-119_com.google.android.googlequicksearchbox.png" class="play"  onclick="startStopwatch()"></img>
+    <img src="Screenshot_2024-06-29-17-04-54-535_com.android.chrome.png" class="pause" onclick="stopStopwatch()"></img>
+    <img src="Screenshot_2024-06-29-17-13-03-499_com.google.android.googlequicksearchbox.png" class="reset" onclick="resetStopwatch()"></img>
+</div>
+<footer><h3 style="color:rgb(96, 67, 32); margin-right: 1220px; margin-top: 40px;">&copy;Sarit_Srimani</h3></footer>
+ 
+
+<script>
+   let timer; // To hold setInterval instance
+let hours = 0, minutes = 0, seconds = 0;
+
+function startStopwatch() {
+    // Check if timer is already running to prevent multiple intervals
+    if (!timer) {
+        timer = setInterval(updateStopwatch, 1000); // Update every second (1000ms)
+    }
+}
+
+function stopStopwatch() {
+    clearInterval(timer);
+    timer = null; // Reset timer variable to allow starting again
+}
+
+function resetStopwatch() {
+    clearInterval(timer);
+    timer = null; // Reset timer variable
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    updateDisplay();
+}
+
+function updateStopwatch() {
+    seconds++;
+    if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes === 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
+    document.querySelector('.stopwatch').textContent = `${h}:${m}:${s}`;
+}
+</script>
+</body>
+</html>
